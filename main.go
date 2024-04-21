@@ -9,11 +9,14 @@ import (
 func main() {
 	fmt.Println("----fizz buzz----: ")
 	fmt.Println(fizzBuzz(20))
+
 	fmt.Println("----palidrome----: ")
 	fmt.Println(isPalindrome("palidrome"))
 	fmt.Println(isPalindrome("racecar"))
+
 	fmt.Println("----Has Two Sums----: ")
 	fmt.Println(co.HasTwoSum([]int{2, 7, 11, 15}, 9))
+
 	fmt.Println("----pin point zeros in matrix----: ")
 	fmt.Println(co.PinpointZero([][]int{
 		{1, 2, 3, 4},
@@ -21,6 +24,14 @@ func main() {
 		{9, 10, 11, 12},
 		{13, 14, 15, 0},
 	}))
+
+	fmt.Println("----sum linked lists----: ")
+	l1 := &co.Node{Val: 2, Next: &co.Node{Val: 4, Next: &co.Node{Val: 3}}}
+	l2 := &co.Node{Val: 5, Next: &co.Node{Val: 6, Next: &co.Node{Val: 4}}}
+	fmt.Println(co.SumLinkedLists(l1, l2))
+
+	fmt.Println("----reverse words----: ")
+	fmt.Println(co.ReverseWords([]byte("reverse me")))
 }
 
 func fizzBuzz(n int) []string {
