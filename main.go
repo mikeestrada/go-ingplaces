@@ -14,7 +14,13 @@ func main() {
 	fmt.Println(isPalindrome("racecar"))
 	fmt.Println("----Has Two Sums----: ")
 	fmt.Println(co.HasTwoSum([]int{2, 7, 11, 15}, 9))
-
+	fmt.Println("----pin point zeros in matrix----: ")
+	fmt.Println(co.PinpointZero([][]int{
+		{1, 2, 3, 4},
+		{5, 0, 7, 8},
+		{9, 10, 11, 12},
+		{13, 14, 15, 0},
+	}))
 }
 
 func fizzBuzz(n int) []string {
