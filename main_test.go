@@ -8,5 +8,5 @@ func testIsPalindrome(t *testing.T) {
 }
 
 func testFizzBuzz(t *testing.T) {
-	// t.Error(fizzBuzz(20)[0] != 1)
+	t.Error(fizzBuzz(20)[0] != "1")
 }
