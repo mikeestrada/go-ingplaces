@@ -1,9 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"go-ing.com/places/co"
+)
 
 func main() {
-	fmt.Println("hello world")
+	fmt.Println("----hello world----: ")
+	fmt.Println(co.Hello())
 	fmt.Println("----fizz buzz----: ")
 	fmt.Println(fizzBuzz(20))
 	fmt.Println("----palidrome----: ")
