@@ -7,13 +7,13 @@ import (
 )
 
 func main() {
-	fmt.Println("----hello world----: ")
-	fmt.Println(co.Hello())
 	fmt.Println("----fizz buzz----: ")
 	fmt.Println(fizzBuzz(20))
 	fmt.Println("----palidrome----: ")
 	fmt.Println(isPalindrome("palidrome"))
 	fmt.Println(isPalindrome("racecar"))
+	fmt.Println("----Has Two Sums----: ")
+	fmt.Println(co.HasTwoSum([]int{2, 7, 11, 15}, 9))
 
 }
 
