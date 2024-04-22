@@ -1,6 +1,17 @@
 package co
 
-import "strings"
+import (
+	"strings"
+)
+
+func IsPalindrome(str string) bool {
+	for i := 0; i < len(str)/2; i++ {
+		if str[i] != str[len(str)-i-1] {
+			return false
+		}
+	}
+	return true
+}
 
 // HasTwoSum searches for sums by checking for the complementary difference with - values in the array and target
 func HasTwoSum(nums []int, target int) bool {
@@ -17,6 +28,8 @@ func HasTwoSum(nums []int, target int) bool {
 	return false
 }
 
+// PinpointZero first searches for zeros and takes note of their address in the matrix.
+// Later iterates through each row/col to zero out the flagged rows/cols.
 func PinpointZero(matrix [][]int) [][]int {
 	rows := len(matrix)
 	cols := len(matrix[0])
@@ -56,7 +69,7 @@ func PinpointZero(matrix [][]int) [][]int {
 }
 
 type Node struct {
-	Val int
+	Val  int
 	Next *Node
 }
 
@@ -86,7 +99,9 @@ func SumLinkedLists(l1, l2 *Node) *Node {
 	return current.Next
 }
 
-func ReverseWords (s []byte) string {
+// ReverseWords uses a tuple swap assignment to reverse. 2 pointers operate against a slice of words.
+// Tuple assignments are atomic in nature and therefore avoid interference.
+func ReverseWords(s []byte) string {
 	// convert byte slice to string
 	str := string(s)
 
@@ -102,4 +117,22 @@ func ReverseWords (s []byte) string {
 	reversed := strings.Join(words, " ")
 
 	return reversed
+}
+
+// GetPalindromes - finds palindrome substrings within a given string of words.
+// Uses 2 pointers: first pointer is root and second denotes the end of the substring. Each letter is root at least once.
+// Second pointer starts at i+2 because a palindrome must be at min 3 letters.
+func GetPalindromes(s string) []string {
+	var result []string
+
+	for i := 0; i < len(s); i++ {
+		for j := i + 2; j <= len(s); j++ {
+			word := s[i:j]
+			if IsPalindrome(word) && len(word) > 1 {
+				result = append(result, word)
+			}
+		}
+	}
+
+	return result
 }

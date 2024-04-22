@@ -11,8 +11,8 @@ func main() {
 	fmt.Println(fizzBuzz(20))
 
 	fmt.Println("----palidrome----: ")
-	fmt.Println(isPalindrome("palidrome"))
-	fmt.Println(isPalindrome("racecar"))
+	fmt.Println(co.IsPalindrome("palidrome"))
+	fmt.Println(co.IsPalindrome("racecar"))
 
 	fmt.Println("----Has Two Sums----: ")
 	fmt.Println(co.HasTwoSum([]int{2, 7, 11, 15}, 9))
@@ -32,6 +32,9 @@ func main() {
 
 	fmt.Println("----reverse words----: ")
 	fmt.Println(co.ReverseWords([]byte("reverse me")))
+
+	fmt.Println("----get palindromes in string----: ")
+	fmt.Println(co.GetPalindromes(("reverse me racecar")))
 }
 
 func fizzBuzz(n int) []string {
@@ -48,13 +51,4 @@ func fizzBuzz(n int) []string {
 		}
 	}
 	return result
-}
-
-func isPalindrome(str string) bool {
-	for i := 0; i < len(str)/2; i++ {
-		if str[i] != str[len(str)-i-1] {
-			return false
-		}
-	}
-	return true
 }
