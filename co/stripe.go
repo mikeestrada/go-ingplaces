@@ -1,6 +1,12 @@
 package co
 
 import (
+	"fmt"
+	"log"
+	"strconv"
+
+	// "log"
+	// "strconv"
 	"strings"
 )
 
@@ -119,6 +125,16 @@ func ReverseWords(s []byte) string {
 	return reversed
 }
 
+func ReverseString(s string) string {
+	runes := []rune(s)
+
+	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+
+	return string(runes)
+}
+
 // GetPalindromes - finds palindrome substrings within a given string of words.
 // Uses 2 pointers: first pointer is root and second denotes the end of the substring. Each letter is root at least once.
 // Second pointer starts at i+2 because a palindrome must be at min 3 letters.
@@ -136,3 +152,70 @@ func GetPalindromes(s string) []string {
 
 	return result
 }
+
+type receivable struct {
+	txDate string
+	amount int
+}
+
+// AggregateReceivables - aggregates receivables by merchant, card type. (Assumption) Date in result is last transaction date.
+func AggregateReceivables(s string) string {
+	lines := strings.Split(s, "\n")
+	receivables := ``
+	merchantTypeAggs := make(map[string]map[string]receivable)
+
+	// iterate through each line of receivables excluding the header
+	for idx, line := range lines {
+		if idx != 0 {
+			date := line[strings.LastIndex(line, ",")+1:]
+			dateRemainder := line[:strings.LastIndex(line, ",")]
+
+			amount := dateRemainder[strings.LastIndex(dateRemainder, ",")+1:]
+			amountRemainder := dateRemainder[:strings.LastIndex(dateRemainder, ",")]
+
+			cardType := amountRemainder[strings.LastIndex(amountRemainder, ",")+1:]
+			cardTypeRemainder := amountRemainder[:strings.LastIndex(amountRemainder, ",")]
+
+			merchant := cardTypeRemainder[strings.LastIndex(cardTypeRemainder, ",")+1:]
+
+			amtInt, err := strconv.ParseInt(amount, 10, 64)
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			if merchantTypeAggs[merchant] == nil {
+				merchantTypeAggs[merchant] = make(map[string]receivable)
+			}
+
+			merchantTypeAggs[merchant][cardType] = receivable{
+				txDate: date,
+				amount: int(amtInt) + merchantTypeAggs[merchant][cardType].amount,
+			}
+		}
+	}
+
+	// generate string of aggregated receivables as expected
+	for merchant, cardTypes := range merchantTypeAggs {
+		for cardType, receivable := range cardTypes {
+			receivables += fmt.Sprintf("%v,%v,%v,%v\n", merchant, cardType, receivable.txDate, receivable.amount)
+		}
+	}
+
+	return receivables
+}
+
+// middle of 2 sorted arrays. resort by using 2 pointers and merging into new array.
+// // return middle or avg of middle 2.
+// func arrarysMedian(a1, a2 []string) string {
+// 	if a1 == nil || a2 == nil {
+// 		return "error"
+// 	}
+// 	pointer1 := 0
+// 	pointer2 := 0
+
+// 	combinedLen := len(a1) + len(a2)
+
+// 	if combinedLen % 2 == 0 {
+// 		return
+// 	}
+// }

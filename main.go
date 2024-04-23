@@ -33,8 +33,22 @@ func main() {
 	fmt.Println("----reverse words----: ")
 	fmt.Println(co.ReverseWords([]byte("reverse me")))
 
+	fmt.Println("----reverse strin----: ")
+	fmt.Println(co.ReverseString("reverse me"))
+
 	fmt.Println("----get palindromes in string----: ")
 	fmt.Println(co.GetPalindromes(("reverse me racecar")))
+
+	fmt.Println("----aggregate Receivables----: ")
+	rec := co.AggregateReceivables((`custId,merchId,type,amount,date
+	custA,merchA,visa,100,2020-01-01
+	custb,merchA,visa,150,2020-01-02
+	custC,merchB,mc,10,2020-01-02
+	custD,merchA,visa,99,2020-01-03
+	custE,merchA,mc,299,2020-01-03
+	custF,merchB,visa,20,2020-01-02`))
+	header := "merchant,cardType,txDate,amount"
+	fmt.Println(header + "\n" + rec)
 }
 
 func fizzBuzz(n int) []string {
